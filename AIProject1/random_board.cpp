@@ -3,8 +3,12 @@
 //  AIProject1
 //
 //  Created by Evan Richards on 9/23/14.
-//  Copyright (c) 2014 Evan Richards. All rights reserved.
+//  Takes 2 numbers on the command line:
+//      Int for seed to RNG
+//      Int for number of moves
 //
+//  Given an input of a 3x3 matrix with numbers 0-8, this randomly swaps
+//      the location of the 0 with an adjacent tile to make a random output.
 
 #include <stdio.h>
 #include <iostream>
@@ -21,25 +25,32 @@ void printState(State state);
 MoveMap initializeMoveMap();
 
 int main(int argc, const char * argv[]) {
+    // Check for bad input
     if(argc != 3){
         std::cout << "Requires 2 command line arguments: integer for seed and integer for number of moves";
         return 0;
     }
-    
-    MoveMap moveMap = initializeMoveMap();
-
+    // Use the inputs, seed the RNG and store the number of moves
     srand(atoi(argv[1]));
     int numMoves =  atoi(argv[2]);
-
+    
+    // This holds the legal moves for each location
+    MoveMap moveMap = initializeMoveMap();
+    
+    // Holds the current state
     State state = std::vector<int>(9, 0);
+    // Holds where the zero is located
     int zeroLocation = -1;
 
+    // Get input for the initial state and store the zero location
     for (int i = 0; i < state.size(); i++) {
         std::cin >> state[i];
         if(zeroLocation == -1 && state[i] == 0){
             zeroLocation = i;
         }
     }
+    
+    // Iterate over moves to randomize puzzle
     for (int i = 0; i < numMoves; i++) {
         int numMoves = int(moveMap[zeroLocation].size());
         int step = moveMap[zeroLocation][rand()%numMoves];
@@ -60,7 +71,6 @@ void printState(State state){
     }
     std::cout<< std::endl;
 }
-
 
 void swap(State& state, int index1, int index2){
     int temp = state[index1];
