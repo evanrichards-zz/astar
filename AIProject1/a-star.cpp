@@ -8,9 +8,11 @@
 
 #include <iostream>
 #include <vector>
+#include <queue>
 #include "Node.h"
 
-typedef  std::vector<int> State;
+typedef std::vector<int> State;
+typedef std::priority_queue<Node*, std::vector<Node*>, Node::CompStr> Frontier;
 
 int zeroHeuristic(Node* node);
 int displacedHeuristic(Node* node);
@@ -48,6 +50,7 @@ int main (int argc, const char * argv[]){
             break;
     }
     
+    Frontier frontier = Frontier();
 }
 
 int zeroHeuristic(Node* node){

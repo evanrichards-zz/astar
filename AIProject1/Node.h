@@ -28,7 +28,16 @@ public:
     int depth;
     State state;
     Node* parentNode;
+    // Override comparators for use in priorty queue.
     
+    struct CompStr{
+        bool operator()(Node* lhs, Node* rhs) const {
+            if(lhs->pathCost == rhs->pathCost) {
+                return lhs->id < rhs->id;
+            }
+            return lhs->pathCost == rhs->pathCost;
+        }
+    };
 };
 
 #endif /* defined(__AIProject1__Node__) */
