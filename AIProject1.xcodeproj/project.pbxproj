@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BE346D9719D280650088F507 /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE346D9519D280650088F507 /* Node.cpp */; };
 		BED6B92019D25CC20071889A /* random_board.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BED6B91F19D25CC20071889A /* random_board.cpp */; };
 		BED6B92219D26D620071889A /* a-star.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BED6B92119D26D620071889A /* a-star.cpp */; };
 /* End PBXBuildFile section */
@@ -24,9 +25,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		BE346D9519D280650088F507 /* Node.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Node.cpp; sourceTree = "<group>"; };
+		BE346D9619D280650088F507 /* Node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Node.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		BED6B91519D25BEC0071889A /* AIProject1 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = AIProject1; sourceTree = BUILT_PRODUCTS_DIR; };
-		BED6B91F19D25CC20071889A /* random_board.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = random_board.cpp; sourceTree = "<group>"; };
-		BED6B92119D26D620071889A /* a-star.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "a-star.cpp"; sourceTree = "<group>"; };
+		BED6B91F19D25CC20071889A /* random_board.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = random_board.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		BED6B92119D26D620071889A /* a-star.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = "a-star.cpp"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +64,8 @@
 			children = (
 				BED6B91F19D25CC20071889A /* random_board.cpp */,
 				BED6B92119D26D620071889A /* a-star.cpp */,
+				BE346D9519D280650088F507 /* Node.cpp */,
+				BE346D9619D280650088F507 /* Node.h */,
 			);
 			path = AIProject1;
 			sourceTree = "<group>";
@@ -121,6 +126,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE346D9719D280650088F507 /* Node.cpp in Sources */,
 				BED6B92019D25CC20071889A /* random_board.cpp in Sources */,
 				BED6B92219D26D620071889A /* a-star.cpp in Sources */,
 			);
@@ -236,6 +242,7 @@
 				BED6B91E19D25BEC0071889A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

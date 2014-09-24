@@ -24,7 +24,8 @@ void swap(State& state, int index1, int index2);
 void printState(State state);
 MoveMap initializeMoveMap();
 
-int main(int argc, const char * argv[]) {
+//int main(int argc, const char * argv[]) {
+int temp(int argc, const char * argv[]) {
     // Check for bad input
     if(argc != 3){
         std::cout << "Requires 2 command line arguments: integer for seed and integer for number of moves";
