@@ -17,15 +17,15 @@
 // TODO: Uncomment print state
 enum directions {UP = -3, RIGHT = 1, DOWN = 3, LEFT = -1};
 
-typedef std::vector<std::vector<int>> MoveMap;
+typedef std::vector<std::vector<int> > MoveMap;
 typedef std::vector<int> State;
 
 void swap(State& state, int index1, int index2);
-//void printState(State state);
+void printState(State state);
 MoveMap initializeMoveMap();
 
-//int main(int argc, const char * argv[]) {
-int temp(int argc, const char * argv[]) {
+int main(int argc, const char * argv[]) {
+//int temp(int argc, const char * argv[]) {
     // Check for bad input
     if(argc != 3){
         std::cout << "Requires 2 command line arguments: integer for seed and integer for number of moves";
@@ -59,19 +59,19 @@ int temp(int argc, const char * argv[]) {
         zeroLocation = zeroLocation + step;
     }
     
-//    printState(state);
+    printState(state);
     return 0;
 }
 
-//void printState(State state){
-//    for (int i = 0; i < 9 ; i+=3) {
-//        for(int j = i; j < i + 3; j++){
-//            std::cout << state[j] << " ";
-//        }
-//        std::cout << std::endl;
-//    }
-//    std::cout<< std::endl;
-//}
+void printState(State state){
+    for (int i = 0; i < 9 ; i+=3) {
+        for(int j = i; j < i + 3; j++){
+            std::cout << state[j] << " ";
+        }
+        std::cout << std::endl;
+    }
+    std::cout<< std::endl;
+}
 
 void swap(State& state, int index1, int index2){
     int temp = state[index1];

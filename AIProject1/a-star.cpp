@@ -21,6 +21,7 @@ int manhattanDistanceHeuristic(State node);
 int personalHeuristic(State node);
 bool isGoalState(State state);
 void printState(State state);
+void outputStatistics(int numNodesVisited, Node* finalNode);
 
 int main (int argc, const char * argv[]){
     // Check for input error
@@ -66,7 +67,6 @@ int main (int argc, const char * argv[]){
     int numNodesVisited = 1;
     // Initialize the root.
     Node* currentNode = new Node(heuristic, initialState, nullptr);
-    frontier.push(currentNode);
     
     while (!isGoalState(currentNode->getState())) {
         // Expand the current node
@@ -86,20 +86,7 @@ int main (int argc, const char * argv[]){
         numNodesVisited++;
     }
     
-    std::cout << "V=" << numNodesVisited << std::endl;
-    std::cout << "N=" << Node::getTotalNumberOfNodes() << std::endl;
-    std::cout << "d=" << currentNode->getDepth() << std::endl;
-    if(currentNode->getDepth() != 0) {
-        std::cout << "b=" << pow(Node::getTotalNumberOfNodes(), 1.f/(currentNode->getDepth())) << std::endl;
-    }
-    std::vector<State> solution = std::vector<State>();
-    while(currentNode != nullptr){
-        solution.push_back(currentNode->getState());
-        currentNode = currentNode->getParentNode();
-    }
-    for (int i = (int)solution.size() - 1; i >= 0; i--) {
-        printState(solution[i]);
-    }
+    outputStatistics(numNodesVisited, currentNode);
 }
 
 int zeroHeuristic(State state){
@@ -161,4 +148,20 @@ void printState(State state){
         std::cout << std::endl;
     }
     std::cout<< std::endl;
+}
+void outputStatistics(int numNodesVisited, Node* finalNode){
+    std::cout << "V=" << numNodesVisited << std::endl;
+    std::cout << "N=" << Node::getTotalNumberOfNodes() << std::endl;
+    std::cout << "d=" << finalNode->getDepth() << std::endl;
+    if(finalNode->getDepth() != 0) {
+        std::cout << "b=" << pow(Node::getTotalNumberOfNodes(), 1.f/(finalNode->getDepth())) << std::endl;
+    }
+    std::vector<State> solution = std::vector<State>();
+    while(finalNode != nullptr){
+        solution.push_back(finalNode->getState());
+        finalNode = finalNode->getParentNode();
+    }
+    for (int i = (int)solution.size() - 1; i >= 0; i--) {
+        printState(solution[i]);
+    }
 }

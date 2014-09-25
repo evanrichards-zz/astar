@@ -45,7 +45,7 @@ public:
             if(lhs->getEvaluation()== rhs->getEvaluation()) {
                 return lhs->id < rhs->id;
             }
-            return lhs->getEvaluation() == rhs->getEvaluation();
+            return lhs->getEvaluation() > rhs->getEvaluation();
         }
     };
     

@@ -14,6 +14,9 @@ Node::Node(int(*heuristic)(State), State state, Node* parentNode) {
     this->heuristic = heuristic;
     this->state = state;
     this->parentNode = parentNode;
+    id = staticId;
+    staticId++;
+    
     successorStates = std::vector<State>();
     
     if(parentNode == nullptr){
@@ -36,8 +39,7 @@ Node::Node(int(*heuristic)(State), State state, Node* parentNode) {
 }
 
 std::vector<State> Node::getSuccessors(){
-    id = staticId;
-    staticId++;
+
     return successorStates;
 }
 
