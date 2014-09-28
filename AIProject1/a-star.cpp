@@ -10,10 +10,12 @@
 #include <vector>
 #include <queue>
 #include <math.h>
+#include <map>
 #include "Node.h"
 
 typedef std::vector<int> State;
 typedef std::priority_queue<Node*, std::vector<Node*>, Node::CompStr> Frontier;
+typedef std::map<State,int> Explored;
 
 int zeroHeuristic(State node);
 int displacedHeuristic(State node);
@@ -26,7 +28,7 @@ void outputStatistics(int numNodesVisited, Node* finalNode);
 int main (int argc, const char * argv[]){
     // Check for input error
     if(argc != 2){
-        std::cout << "Requires 1 command line argument: integer for heuritic choice";
+        std::cout << "Requires 1 command line argument: integer for heuritic choice.\n";
         std::cout << "\t0: h(n) = 0\n";
         std::cout << "\t1: h(n) = Number of tiles displaced from the goal\n";
         std::cout << "\t2: h(n) = Sum of Manhattan (city-block) distances of all tiles from the goal\n";
@@ -63,17 +65,24 @@ int main (int argc, const char * argv[]){
             break;
     }
     
+    Explored explored = Explored();
     Frontier frontier = Frontier();
-    int numNodesVisited = 1;
+
     // Initialize the root.
-    Node* currentNode = new Node(heuristic, initialState, nullptr);
+    Node* root = new Node(heuristic(initialState), initialState, nullptr);
+    Node* currentNode = root;
     
     while (!isGoalState(currentNode->getState())) {
         // Expand the current node
         std::vector<State> successors = currentNode->getSuccessors();
         // Create nodes out of the new states
         for (int i = 0; i < successors.size(); i++) {
-            Node* successorNode = new Node(heuristic,
+            if(explored.find(successors[i]) != explored.end()
+               && explored[successors[i]] <= currentNode->getDepth() + 1){
+                // Don't add node, worse than already seen.
+                continue;
+            }
+            Node* successorNode = new Node(heuristic(successors[i]),
                                           successors[i],
                                           currentNode);
             // Add new nodes to the frontier
@@ -82,11 +91,12 @@ int main (int argc, const char * argv[]){
         
         // Update currentNode
         currentNode = frontier.top();
+        explored[currentNode->getState()] =  currentNode->getDepth();
         frontier.pop();
-        numNodesVisited++;
     }
     
-    outputStatistics(numNodesVisited, currentNode);
+    outputStatistics((int)explored.size(), currentNode);
+    delete root;
 }
 
 int zeroHeuristic(State state){
@@ -110,7 +120,6 @@ int manhattanDistanceHeuristic(State state){
         int finalLocation = state[i];
         while(currentLocation != finalLocation){
             if(finalLocation > currentLocation){
-                // TODO make can't move right because on wall clearer
                 if(currentLocation % 3 == 2 || abs(currentLocation + 3 - finalLocation) < abs(currentLocation + 1 - finalLocation)){
                     currentLocation += 3;
                 } else {
@@ -149,7 +158,9 @@ void printState(State state){
     }
     std::cout<< std::endl;
 }
+
 void outputStatistics(int numNodesVisited, Node* finalNode){
+    // TODO: Move into node class as describe
     std::cout << "V=" << numNodesVisited << std::endl;
     std::cout << "N=" << Node::getTotalNumberOfNodes() << std::endl;
     std::cout << "d=" << finalNode->getDepth() << std::endl;
@@ -158,10 +169,7 @@ void outputStatistics(int numNodesVisited, Node* finalNode){
     }
     std::vector<State> solution = std::vector<State>();
     while(finalNode != nullptr){
-        solution.push_back(finalNode->getState());
+        printState(finalNode->getState());
         finalNode = finalNode->getParentNode();
-    }
-    for (int i = (int)solution.size() - 1; i >= 0; i--) {
-        printState(solution[i]);
     }
 }

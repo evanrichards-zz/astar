@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		BE346D9719D280650088F507 /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE346D9519D280650088F507 /* Node.cpp */; };
+		BE47AE1619D49A4D00FB2BBB /* a-star100x.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE47AE1519D49A4D00FB2BBB /* a-star100x.cpp */; };
+		BE47AE1919D4D6A600FB2BBB /* boardGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE47AE1719D4D6A600FB2BBB /* boardGenerator.cpp */; };
+		BE47AE2119D5DA8C00FB2BBB /* MoveMapMaker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE47AE1F19D5DA8C00FB2BBB /* MoveMapMaker.cpp */; };
 		BED6B92019D25CC20071889A /* random_board.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BED6B91F19D25CC20071889A /* random_board.cpp */; };
 		BED6B92219D26D620071889A /* a-star.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BED6B92119D26D620071889A /* a-star.cpp */; };
 /* End PBXBuildFile section */
@@ -27,6 +30,11 @@
 /* Begin PBXFileReference section */
 		BE346D9519D280650088F507 /* Node.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Node.cpp; sourceTree = "<group>"; };
 		BE346D9619D280650088F507 /* Node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Node.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		BE47AE1519D49A4D00FB2BBB /* a-star100x.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "a-star100x.cpp"; sourceTree = "<group>"; };
+		BE47AE1719D4D6A600FB2BBB /* boardGenerator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = boardGenerator.cpp; sourceTree = "<group>"; };
+		BE47AE1819D4D6A600FB2BBB /* boardGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = boardGenerator.h; sourceTree = "<group>"; };
+		BE47AE1F19D5DA8C00FB2BBB /* MoveMapMaker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MoveMapMaker.cpp; sourceTree = "<group>"; };
+		BE47AE2019D5DA8C00FB2BBB /* MoveMapMaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoveMapMaker.h; sourceTree = "<group>"; };
 		BED6B91519D25BEC0071889A /* AIProject1 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = AIProject1; sourceTree = BUILT_PRODUCTS_DIR; };
 		BED6B91F19D25CC20071889A /* random_board.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = random_board.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		BED6B92119D26D620071889A /* a-star.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = "a-star.cpp"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
@@ -62,10 +70,15 @@
 		BED6B91719D25BEC0071889A /* AIProject1 */ = {
 			isa = PBXGroup;
 			children = (
+				BE47AE1F19D5DA8C00FB2BBB /* MoveMapMaker.cpp */,
+				BE47AE2019D5DA8C00FB2BBB /* MoveMapMaker.h */,
 				BED6B91F19D25CC20071889A /* random_board.cpp */,
 				BED6B92119D26D620071889A /* a-star.cpp */,
+				BE47AE1519D49A4D00FB2BBB /* a-star100x.cpp */,
 				BE346D9519D280650088F507 /* Node.cpp */,
 				BE346D9619D280650088F507 /* Node.h */,
+				BE47AE1719D4D6A600FB2BBB /* boardGenerator.cpp */,
+				BE47AE1819D4D6A600FB2BBB /* boardGenerator.h */,
 			);
 			path = AIProject1;
 			sourceTree = "<group>";
@@ -126,9 +139,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE47AE2119D5DA8C00FB2BBB /* MoveMapMaker.cpp in Sources */,
+				BE47AE1619D49A4D00FB2BBB /* a-star100x.cpp in Sources */,
 				BE346D9719D280650088F507 /* Node.cpp in Sources */,
 				BED6B92019D25CC20071889A /* random_board.cpp in Sources */,
 				BED6B92219D26D620071889A /* a-star.cpp in Sources */,
+				BE47AE1919D4D6A600FB2BBB /* boardGenerator.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
