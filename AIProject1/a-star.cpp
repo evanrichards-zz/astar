@@ -24,6 +24,9 @@ bool isGoalState(State state);
 void printState(State state);
 void outputStatistics(int numNodesVisited, Node* finalNode);
 bool stateExistsInPath(State state, Node* parentNode);
+int manhattanMovement(State state, int from);
+int manhattanMovement(State state, int from, int to);
+
 
 
 int main (int argc, const char * argv[]){
@@ -116,29 +119,34 @@ int displacedHeuristic(State state){
 int manhattanDistanceHeuristic(State state){
     int sumOfDistances = 0;
     for (int i = 0; i < state.size(); i++) {
-        int currentLocation = i;
-        int finalLocation = state[i];
-        while(currentLocation != finalLocation){
-            if(finalLocation > currentLocation){
-                if(currentLocation % 3 == 2 || abs(currentLocation + 3 - finalLocation) < abs(currentLocation + 1 - finalLocation)){
-                    currentLocation += 3;
-                } else {
-                    currentLocation += 1;
-                }
-            } else {
-                if(currentLocation % 3 == 0 || abs(currentLocation - 3 - finalLocation) < abs(currentLocation - 1 - finalLocation)){
-                    currentLocation -= 3;
-                } else {
-                    currentLocation -= 1;
-                }
-            }
-            sumOfDistances++;
-        }
+        sumOfDistances += manhattanMovement(state, i);
     }
     return sumOfDistances;
 }
 
-int personalHeuristic(State state){return 0;}
+int personalHeuristic(State state){
+    int distance = 0;
+    int zeroLocation = 0;
+    // Find the zero location
+    for (int i = 0; i < 9; i++){
+        if(state[i] == 0){
+            zeroLocation = i;
+            break;
+        }
+    }
+    
+    for(int iterLocation = 0; iterLocation < 9; iterLocation++){
+        if (iterLocation == zeroLocation || state[iterLocation] == iterLocation) {
+            continue;
+        }
+        // Find manhattan distance from zero to number.
+        distance += manhattanMovement(state, zeroLocation, iterLocation);
+        
+        // Find manhattan distance from number to correct location
+        distance += manhattanMovement(state, iterLocation);
+    }
+    return distance;
+}
 
 bool isGoalState(State state){
     for (int i = 0; i < state.size(); i++) {
@@ -167,6 +175,31 @@ bool stateExistsInPath(State state, Node* parentNode){
         parentNode = parentNode->getParentNode();
     }
     return false;
+}
+int manhattanMovement(State state, int from){
+    return manhattanMovement(state, from, state[from]);
+}
+int manhattanMovement(State state, int from, int to){
+    int sumOfDistances = 0;
+    int currentLocation = from;
+    int finalLocation = to;
+    while(currentLocation != finalLocation){
+        if(finalLocation > currentLocation){
+            if(currentLocation % 3 == 2 || abs(currentLocation + 3 - finalLocation) < abs(currentLocation + 1 - finalLocation)){
+                currentLocation += 3;
+            } else {
+                currentLocation += 1;
+            }
+        } else {
+            if(currentLocation % 3 == 0 || abs(currentLocation - 3 - finalLocation) < abs(currentLocation - 1 - finalLocation)){
+                currentLocation -= 3;
+            } else {
+                currentLocation -= 1;
+            }
+        }
+        sumOfDistances++;
+    }
+    return sumOfDistances;
 }
 
 void outputStatistics(int numNodesVisited, Node* finalNode){

@@ -35,7 +35,7 @@ bool stateExistsInPath(State state, Node* parentNode);
 
 int main (int argc, const char * argv[]){
     // Check for input error
-    for (int heuristicChoice = 0; heuristicChoice < 3; heuristicChoice++) {
+    for (int heuristicChoice = 3; heuristicChoice < 4; heuristicChoice++) {
         // Define heuristic function pointer and assign it
         int (*heuristic)(State) = NULL;
         switch (heuristicChoice) {
@@ -137,7 +137,61 @@ int manhattanDistanceHeuristic(State state){
     return sumOfDistances;
 }
 
-int personalHeuristic(State state){return 0;}
+int personalHeuristic(State state){
+    int distance = 0;
+    int zeroLocation = 0;
+    // Find the zero location
+    for (int i = 0; i < 9; i++){
+        if(state[i] == 0){
+            zeroLocation = i;
+            break;
+        }
+    }
+    
+    for(int i = 0; i < 9; i++){
+        if (i == zeroLocation || state[i] == i) {
+            continue;
+        }
+        // Find manhattan distance from zero to number.
+        int tempZero = zeroLocation;
+        while (tempZero != i){
+            if(i > tempZero){
+                if(tempZero % 3 == 2 || abs(tempZero + 3 - i) < abs(tempZero + 1 - i)){
+                    tempZero += 3;
+                } else {
+                    tempZero += 1;
+                }
+            } else {
+                if(tempZero % 3 == 0 || abs(tempZero - 3 - i) < abs(tempZero - 1 - i)){
+                    tempZero -= 3;
+                } else {
+                    tempZero -= 1;
+                }
+            }
+            distance++;
+        }
+        // Find manhattan distance from number to correct location
+        int currentLocation = i;
+        int finalLocation = state[i];
+        while(currentLocation != finalLocation){
+            if(finalLocation > currentLocation){
+                if(currentLocation % 3 == 2 || abs(currentLocation + 3 - finalLocation) < abs(currentLocation + 1 - finalLocation)){
+                    currentLocation += 3;
+                } else {
+                    currentLocation += 1;
+                }
+            } else {
+                if(currentLocation % 3 == 0 || abs(currentLocation - 3 - finalLocation) < abs(currentLocation - 1 - finalLocation)){
+                    currentLocation -= 3;
+                } else {
+                    currentLocation -= 1;
+                }
+            }
+            distance++;
+        }
+    }
+    return distance;
+}
 
 bool isGoalState(State state){
     for (int i = 0; i < state.size(); i++) {
