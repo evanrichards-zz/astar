@@ -27,8 +27,6 @@ bool stateExistsInPath(State state, Node* parentNode);
 int manhattanMovement(State state, int from);
 int manhattanMovement(State state, int from, int to);
 
-
-
 int main (int argc, const char * argv[]){
     // Check for input error
     if(argc != 2){
@@ -36,8 +34,7 @@ int main (int argc, const char * argv[]){
         std::cout << "\t0: h(n) = 0\n";
         std::cout << "\t1: h(n) = Number of tiles displaced from the goal\n";
         std::cout << "\t2: h(n) = Sum of Manhattan (city-block) distances of all tiles from the goal\n";
-        //TODO: REPLACE THIS LINE WITH DESCRIPTION
-        std::cout << "\t3: h(n) = A novel heuristic of my own design\n";
+        std::cout << "\t3: h(n) = Manhattan distance plus distance from zero to tile\n";
         return 0;
     }
     int heuristicChoice = atoi(argv[1]);
