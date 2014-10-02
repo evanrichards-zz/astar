@@ -31,12 +31,13 @@ int manhattanDistanceHeuristic(State node);
 int personalHeuristic(State node);
 bool isGoalState(State state);
 void outputStatistics(int numNodesVisited, Node* finalNode, int heuristicChoice);
+bool stateExistsInPath(State state, Node* parentNode);
 
 int main (int argc, const char * argv[]){
     // Check for input error
     for (int heuristicChoice = 0; heuristicChoice < 3; heuristicChoice++) {
         // Define heuristic function pointer and assign it
-        int (*heuristic)(State) = nullptr;
+        int (*heuristic)(State) = NULL;
         switch (heuristicChoice) {
             case 0:
                 heuristic = &zeroHeuristic;
@@ -60,23 +61,21 @@ int main (int argc, const char * argv[]){
 
             State initialState = BoardGenerator::getRandomBoard(seed, 100);
 
-            Explored explored = Explored();
             Frontier frontier = Frontier();
     
             // Initialize the root.
-            Node* root = new Node(heuristic, initialState, nullptr);
+            Node* root = new Node(heuristic(initialState), initialState, NULL);
             Node* currentNode = root;
             while (!isGoalState(currentNode->getState())) {
                 // Expand the current node
                 std::vector<State> successors = currentNode->getSuccessors();
                 // Create nodes out of the new states
                 for (int i = 0; i < successors.size(); i++) {
-                    if(explored.find(successors[i]) != explored.end()
-                       && explored[successors[i]] <= currentNode->getDepth() + 1){
+                    if(stateExistsInPath(successors[i], currentNode)){
                         // Don't add node, worse than already seen.
                         continue;
                     }
-                    Node* successorNode = new Node(heuristic,
+                    Node* successorNode = new Node(heuristic(successors[i]),
                                                   successors[i],
                                                   currentNode);
                     // Add new nodes to the frontier
@@ -85,12 +84,13 @@ int main (int argc, const char * argv[]){
                 }
                 
                 // Update currentNode
-                explored[currentNode->getState()] =  currentNode->getDepth();
                 currentNode = frontier.top();
                 frontier.pop();
             }
             // TODO: Alter to remove cast.
-            outputStatistics((int)explored.size(), currentNode, heuristicChoice);
+            outputStatistics(Node::getTotalNumberOfNodes() - (int)frontier.size(),
+                             currentNode,
+                             heuristicChoice);
             delete root;
             Node::resetStaticId();
         }
@@ -148,6 +148,17 @@ bool isGoalState(State state){
     return true;
 }
 
+bool stateExistsInPath(State state, Node* parentNode){
+    while(parentNode != NULL){
+        if(parentNode->getState() == state){
+            return true;
+        }
+        parentNode = parentNode->getParentNode();
+    }
+    return false;
+}
+
+
 void outputStatistics(int numNodesVisited, Node* finalNode, int heuristicChoice){
     std::string filename = "astarstats";
     switch (heuristicChoice) {
@@ -165,7 +176,6 @@ void outputStatistics(int numNodesVisited, Node* finalNode, int heuristicChoice)
     }
     filename += ".csv";
     std::ofstream output (filename, std::ios::app);
-    // TODO: modify to write to file, make csv.
     output << numNodesVisited << ",";
     output << Node::getTotalNumberOfNodes() << ",";
     output << finalNode->getDepth() << ",";

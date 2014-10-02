@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Evan Richards. All rights reserved.
 //
 
-
+#include <cstdlib>
 #include "boardGenerator.h"
 
 void BoardGenerator::swap(State& state, int index1, int index2){

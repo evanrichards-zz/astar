@@ -18,7 +18,7 @@ Node::Node(int heuristicNum, State state, Node* parentNode) {
     
     successorStates = std::vector<State>();
     
-    if(parentNode == nullptr){
+    if(parentNode == NULL){
         depth = 0;
     } else {
         depth = parentNode->depth + 1;

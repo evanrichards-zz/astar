@@ -11,6 +11,7 @@
 		BE47AE1619D49A4D00FB2BBB /* a-star100x.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE47AE1519D49A4D00FB2BBB /* a-star100x.cpp */; };
 		BE47AE1919D4D6A600FB2BBB /* boardGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE47AE1719D4D6A600FB2BBB /* boardGenerator.cpp */; };
 		BE47AE2119D5DA8C00FB2BBB /* MoveMapMaker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE47AE1F19D5DA8C00FB2BBB /* MoveMapMaker.cpp */; };
+		BED1638119DCF6500033A8C0 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = BED1637F19DCF6500033A8C0 /* Makefile */; };
 		BED6B92019D25CC20071889A /* random_board.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BED6B91F19D25CC20071889A /* random_board.cpp */; };
 		BED6B92219D26D620071889A /* a-star.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BED6B92119D26D620071889A /* a-star.cpp */; };
 /* End PBXBuildFile section */
@@ -35,6 +36,7 @@
 		BE47AE1819D4D6A600FB2BBB /* boardGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = boardGenerator.h; sourceTree = "<group>"; };
 		BE47AE1F19D5DA8C00FB2BBB /* MoveMapMaker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MoveMapMaker.cpp; sourceTree = "<group>"; };
 		BE47AE2019D5DA8C00FB2BBB /* MoveMapMaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoveMapMaker.h; sourceTree = "<group>"; };
+		BED1637F19DCF6500033A8C0 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		BED6B91519D25BEC0071889A /* AIProject1 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = AIProject1; sourceTree = BUILT_PRODUCTS_DIR; };
 		BED6B91F19D25CC20071889A /* random_board.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = random_board.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		BED6B92119D26D620071889A /* a-star.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = "a-star.cpp"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
@@ -74,6 +76,7 @@
 				BE47AE2019D5DA8C00FB2BBB /* MoveMapMaker.h */,
 				BED6B91F19D25CC20071889A /* random_board.cpp */,
 				BED6B92119D26D620071889A /* a-star.cpp */,
+				BED1637F19DCF6500033A8C0 /* Makefile */,
 				BE47AE1519D49A4D00FB2BBB /* a-star100x.cpp */,
 				BE346D9519D280650088F507 /* Node.cpp */,
 				BE346D9619D280650088F507 /* Node.h */,
@@ -144,6 +147,7 @@
 				BE346D9719D280650088F507 /* Node.cpp in Sources */,
 				BED6B92019D25CC20071889A /* random_board.cpp in Sources */,
 				BED6B92219D26D620071889A /* a-star.cpp in Sources */,
+				BED1638119DCF6500033A8C0 /* Makefile in Sources */,
 				BE47AE1919D4D6A600FB2BBB /* boardGenerator.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

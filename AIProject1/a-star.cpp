@@ -10,12 +10,11 @@
 #include <vector>
 #include <queue>
 #include <math.h>
-#include <map>
+#include <stdlib.h>
 #include "Node.h"
 
 typedef std::vector<int> State;
 typedef std::priority_queue<Node*, std::vector<Node*>, Node::CompStr> Frontier;
-typedef std::map<State,int> Explored;
 
 int zeroHeuristic(State node);
 int displacedHeuristic(State node);
@@ -24,6 +23,8 @@ int personalHeuristic(State node);
 bool isGoalState(State state);
 void printState(State state);
 void outputStatistics(int numNodesVisited, Node* finalNode);
+bool stateExistsInPath(State state, Node* parentNode);
+
 
 int main (int argc, const char * argv[]){
     // Check for input error
@@ -65,11 +66,10 @@ int main (int argc, const char * argv[]){
             break;
     }
     
-    Explored explored = Explored();
     Frontier frontier = Frontier();
 
     // Initialize the root.
-    Node* root = new Node(heuristic(initialState), initialState, nullptr);
+    Node* root = new Node(heuristic(initialState), initialState, NULL);
     Node* currentNode = root;
     
     while (!isGoalState(currentNode->getState())) {
@@ -77,25 +77,25 @@ int main (int argc, const char * argv[]){
         std::vector<State> successors = currentNode->getSuccessors();
         // Create nodes out of the new states
         for (int i = 0; i < successors.size(); i++) {
-            if(explored.find(successors[i]) != explored.end()
-               && explored[successors[i]] <= currentNode->getDepth() + 1){
+            if(stateExistsInPath(successors[i], currentNode)){
                 // Don't add node, worse than already seen.
                 continue;
             }
             Node* successorNode = new Node(heuristic(successors[i]),
-                                          successors[i],
-                                          currentNode);
+                                           successors[i],
+                                           currentNode);
             // Add new nodes to the frontier
             frontier.push(successorNode);
+            currentNode->addChild(successorNode);
         }
         
         // Update currentNode
         currentNode = frontier.top();
-        explored[currentNode->getState()] =  currentNode->getDepth();
         frontier.pop();
     }
     
-    outputStatistics((int)explored.size(), currentNode);
+    outputStatistics(Node::getTotalNumberOfNodes() - (int)frontier.size(),
+                     currentNode);
     delete root;
 }
 
@@ -159,6 +159,16 @@ void printState(State state){
     std::cout<< std::endl;
 }
 
+bool stateExistsInPath(State state, Node* parentNode){
+    while(parentNode != NULL){
+        if(parentNode->getState() == state){
+            return true;
+        }
+        parentNode = parentNode->getParentNode();
+    }
+    return false;
+}
+
 void outputStatistics(int numNodesVisited, Node* finalNode){
     // TODO: Move into node class as describe
     std::cout << "V=" << numNodesVisited << std::endl;
@@ -168,8 +178,12 @@ void outputStatistics(int numNodesVisited, Node* finalNode){
         std::cout << "b=" << pow(Node::getTotalNumberOfNodes(), 1.f/(finalNode->getDepth())) << std::endl;
     }
     std::vector<State> solution = std::vector<State>();
-    while(finalNode != nullptr){
-        printState(finalNode->getState());
+    while(finalNode != NULL){
+        solution.push_back(finalNode->getState());
         finalNode = finalNode->getParentNode();
+    }
+    while(!solution.empty()){
+        printState(solution.front());
+        solution.pop_back();
     }
 }
